@@ -1,4 +1,4 @@
-# Linear_Equation_Solver
+# Linear Equation Solver
 Solves the Linear equations by Gauss Jordan Elimination method.
 
 The code requires 2 args to run.
