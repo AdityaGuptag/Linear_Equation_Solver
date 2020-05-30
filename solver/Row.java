@@ -27,24 +27,22 @@ public class Row {
         }
     }
 
-    public Row prodWithConst (double constant) {
-        ComplexNumber[] tempArr = Arrays.copyOf(elementsArr, numVars + 1);
+    public Row prodWithConst(ComplexNumber constant) {
+        ComplexNumber[] tempArr = Arrays.copyOf(this.elementsArr, numVars + 1);
         Row tempRow = new Row(numVars);
         String test = "";
         for (int i = 0 ; i < numVars + 1; i++) {
-            tempArr[i].setRealPart(tempArr[i].getRealPart() * constant);
-            tempArr[i].setImaginaryPart(tempArr[i].getImaginaryPart() * constant);
-            test = test + tempArr[i].toString() + "^";
+            tempArr[i] = tempArr[i].prodWithComplexNum(constant);
+            test = test + tempArr[i].toString() + " ";
         }
-        String[] strArr = test.split("^", 0);
+        String[] strArr = test.split(" ", 0);
         tempRow.generateRow(strArr);
         return tempRow;
     }
 
     public void sumWithRow(Row other) {
         for (int i = 0; i < numVars + 1; i++) {
-            this.elementsArr[i].setRealPart(this.elementsArr[i].getRealPart() + other.elementsArr[i].getRealPart());
-            this.elementsArr[i].setImaginaryPart(this.elementsArr[i].getImaginaryPart() + other.elementsArr[i].getImaginaryPart());
+            this.elementsArr[i].addToComplexNum(other.elementsArr[i]);
         }
     }
 

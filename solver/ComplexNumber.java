@@ -7,7 +7,7 @@ public class ComplexNumber {
     private double realPart = 0.0;
     private double imaginaryPart = 0.0;
     private char sign = ' ';
-    private final String regexPattern = "^(-?[0-9]*)([+|-][0-9]*)?([i])?$";
+    private final String regexPattern = "^([-|+]?[0-9.]*)([+|-][0-9.]*)?([i])?$";
 
     public ComplexNumber(String complexNumber) {
         Pattern pattern = Pattern.compile(this.regexPattern);
@@ -50,10 +50,7 @@ public class ComplexNumber {
     }
 
     public boolean checkIfZero() {
-        if (this.realPart == 0.0 && this.imaginaryPart == 0.0) {
-            return true;
-        }
-        return false;
+        return this.realPart == 0.0 && this.imaginaryPart == 0.0;
     }
 
     public double getRealPart() {
@@ -109,6 +106,18 @@ public class ComplexNumber {
         return tempNum;
     }
 
+    public void addToComplexNum(ComplexNumber other) {
+        this.realPart = this.realPart + other.getRealPart();
+        this.imaginaryPart = this.imaginaryPart + other.getImaginaryPart();
+        if (this.imaginaryPart > 0) {
+            this.sign = '+';
+        } else if (this.imaginaryPart < 0) {
+            this.sign = '-';
+        } else {
+            this.sign = ' ';
+        }
+    }
+
     public ComplexNumber prodWithComplexNum(ComplexNumber other) {
         ComplexNumber tempNum = new ComplexNumber(this.realPart, this.imaginaryPart, this.sign);
         tempNum.setRealPart(this.realPart * other.getRealPart() +
@@ -136,5 +145,9 @@ public class ComplexNumber {
         }  else {
             return Double.toString(this.realPart) + this.sign + this.imaginaryPart + 'i';
         }
+    }
+
+    public boolean equals(ComplexNumber other) {
+        return this.realPart == other.getRealPart() && this.imaginaryPart == other.getImaginaryPart();
     }
 }
