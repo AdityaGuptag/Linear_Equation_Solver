@@ -7,14 +7,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        // This String stores the input file path
         String inputFile = args[0];
+
+        // This String stores the output file path
         String outputFile = args[1];
+
+        // File Handlers for input and output files
         File inFile = new File(inputFile);
         File outFile = new File(outputFile);
+
         Scanner scanner = new Scanner(inFile);
         int numOfVariables = scanner.nextInt();
         int numOfEquations = scanner.nextInt();
         double[] tmpRowArr = new double[numOfVariables + 1];
+
+        // The linear equtions from input file are stored into Matrix m
         Matrix m = new Matrix(numOfVariables, numOfEquations);
         int cnt = 0;
 
@@ -28,8 +36,10 @@ public class Main {
         }
         scanner.close();
 
+        // This function solves the linear equations
         m.solveEquations();
 
+        // Here, solutions to the linear equations computed in previous step is stored in the output file
         PrintWriter writer = new PrintWriter(outFile);
         if (m.ans.equals("No solutions") || m.ans.equals("Infinitely many solutions")) {
             System.out.println(m.ans);
